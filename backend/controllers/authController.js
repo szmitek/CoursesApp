@@ -5,14 +5,15 @@ exports.loginPage = (req, res) => {
 }
 
 exports.loginUser = (req, res) => {
-    const email = req.query.email;
-    const password = req.query.password;
+    const email = req.body.email;
+    const password = req.body.password;
 
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    firebaseApp
+        .auth()
+        .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            res.send(user);
             return res.redirect('/courses');
         })
         .catch((error) => {

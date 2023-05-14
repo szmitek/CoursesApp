@@ -9,7 +9,7 @@ const courseController = require('./controllers/courseController');
 const authController = require('./controllers/authController');
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.route('/')
     .get(authController.loginPage)
