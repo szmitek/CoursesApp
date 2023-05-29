@@ -16,7 +16,7 @@ app.route('/')
     .post(authController.loginUser);
 
 app.get('logout', authController.logout);
-app.get('courses', courseController.getCourses);
+app.route('/courses').get(courseController.getCourses);
 app.get('courses/:id', courseController.getCourseById);
 //app.post('courses', courseController.createCourse);
 //app.put('courses/:id', courseController.updateCourse);
