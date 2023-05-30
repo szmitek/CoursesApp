@@ -1,16 +1,14 @@
-const firebaseApp = require('../firebaseConfig.js');
+const { auth } = require('../firebaseConfig');
 
 exports.loginPage = (req, res) => {
-    res.render('login.ejs')
-}
+    res.render('login.ejs');
+};
 
 exports.loginUser = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    firebaseApp
-        .auth()
-        .signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
@@ -21,10 +19,10 @@ exports.loginUser = (req, res) => {
             const errorMessage = error.message;
             res.send(errorCode + ' ' + errorMessage);
         });
-}
+};
 
 exports.logout = (req, res) => {
-    firebaseApp.auth().signOut()
+    auth.signOut()
         .then(() => {
             res.send('Logged out');
         })
@@ -33,4 +31,4 @@ exports.logout = (req, res) => {
             const errorMessage = error.message;
             res.send(errorCode + ' ' + errorMessage);
         });
-}
+};
