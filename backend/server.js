@@ -1,9 +1,8 @@
-// Express server on port 3000
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 3000;
+const port = 7777;
 
 const courseController = require('./controllers/courseController');
 const authController = require('./controllers/authController');
