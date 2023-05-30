@@ -11,7 +11,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.route('/')
-    .get(authController.loginPage)
     .post(authController.loginUser);
 
 app.get('logout', authController.logout);
