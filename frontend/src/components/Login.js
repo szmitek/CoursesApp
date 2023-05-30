@@ -13,6 +13,10 @@ const Login = () => {
             const response = await axios.post('http://localhost:7777/', { email, password });
 
             console.log(response.data); // Check the response from the backend
+
+            // Save the authentication token in browser storage
+            localStorage.setItem('authToken', response.data.token);
+
             // Redirect the user to the /courses page
             window.location.href = '/courses';
         } catch (error) {
