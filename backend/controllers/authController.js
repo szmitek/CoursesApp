@@ -1,9 +1,5 @@
 const { auth } = require('../firebaseConfig');
 
-exports.loginPage = (req, res) => {
-    res.render('login.ejs');
-};
-
 exports.loginUser = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
