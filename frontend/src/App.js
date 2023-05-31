@@ -8,7 +8,6 @@ const App = () => {
     return (
         <Router>
             <div>
-                <h1>Welcome to Your App</h1>
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <PrivateRoute path="/courses" component={Courses} />
