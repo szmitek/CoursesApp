@@ -1,9 +1,10 @@
 const firebase = require("firebase/compat/app");
 require("firebase/compat/firestore");
 require("firebase/compat/auth");
+require("firebase/compat/storage");
 
 const firebaseConfig = {
-//Your firebase config here
+    // Your config values go here
 };
 
 // Initialize Firebase
@@ -15,4 +16,7 @@ const firestore = firebase.firestore();
 // Initialize Authentication
 const auth = firebase.auth();
 
-module.exports = { firestore, auth };
+// Initialize Storage
+const storage = firebase.storage();
+
+module.exports = { firestore, auth, storage };
