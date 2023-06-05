@@ -29,7 +29,9 @@ const CoursesPage = () => {
                     <div key={course.id} className="course-box">
                         <div className="course-image">
                             <div className="position-tag">{course.position}</div>
-                            <img src={course.imageURL} alt={course.title} />
+                            <a href={`/courses/${course.id}`}>
+                                <img src={course.imageURL} alt={course.title} />
+                            </a>
                         </div>
                         <div className="course-details">
                             <h3>{course.title}</h3>
