@@ -12,7 +12,7 @@ To run this project locally, make sure you have the following installed:
 * Firestore database
 * Firebase Storage
 ## Getting Started
-1. Clone the repository: git clone https://github.com/your-username/video-course-sharing.git
+1. Clone the repository: git clone https://github.com/szmitek/CoursesApp.git
 2. Go to the frontend directory: cd video-course-sharing/frontend
 3. Install frontend dependencies: npm install
 4. Go to the backend directory: cd ../backend
