@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Hls from 'hls.js';
+import './styles/SingleCourse.css';
 
 const SingleCourse = ({ match }) => {
     const courseId = match.params.id;
@@ -39,6 +40,8 @@ const SingleCourse = ({ match }) => {
                 videoRef.current.play();
             });
         }
+
+        const rgx = /([a-z0-9]{10})(:?\/|$)/g;
 
         const stream = async () => {
             if (hls === null) {
@@ -102,7 +105,7 @@ const SingleCourse = ({ match }) => {
 
             let data = "#EXTM3U\n#EXT-X-PLAYLIST-TYPE:VOD\n#EXT-X-TARGETDURATION:10";
             for (let i = 0; i <= last; i++) {
-                data += `\n#EXTINF:10.000,\nhttps://d13z5uuzt1wkbz.cloudfront.net/${videoId}/HIDDEN4500-${String(i).padStart(5, "0")}.ts\n`;
+                data += `#EXTINF:10,\nhttps://d13z5uuzt1wkbz.cloudfront.net/${videoId}/HIDDEN4500-${String(i).padStart(5, "0")}.ts\n`
             }
 
             console.log(data);
@@ -111,7 +114,6 @@ const SingleCourse = ({ match }) => {
             hls.attachMedia(videoRef.current);
         };
 
-        const rgx = /([a-z0-9]{10})(:?\/|$)/g;
 
         const streamBtn = document.getElementById("streamBtn");
         if (streamBtn) {
@@ -133,23 +135,40 @@ const SingleCourse = ({ match }) => {
     }
 
     return (
-        <div>
-            <label>URL:</label>
-            <input style={{ width: "300px" }} id="url" placeholder="https://www.skill-capped.com/lol/commentaries/p1qcnwqt75" />
-            <button style={{ width: "80px" }} id="streamBtn">Stream</button>
-            <label style={{ display: "block" }} id="status"></label>
-            <video
-                ref={videoRef}
-                style={{ display: "block", marginTop: "10px" }}
-                height="720"
-                width="1280"
-                id="video"
-                controls
-                autoPlay
-                crossOrigin="anonymous"
-            />
-            <h2>{course.title}</h2>
-            <img src={course.imageURL} alt={course.title} />
+        <div className="container">
+            <div className="video-container">
+                <label>URL:</label>
+                <input style={{ width: "300px" }} id="url" placeholder="https://www.skill-capped.com/lol/commentaries/p1qcnwqt75" />
+                <button style={{ width: "80px" }} id="streamBtn">Stream</button>
+                <label style={{ display: "block" }} id="status"></label>
+                <video
+                    className="video"
+                    ref={videoRef}
+                    style={{ display: "block", marginTop: "10px" }}
+                    height="720"
+                    width="1280"
+                    id="video"
+                    controls
+                    autoPlay
+                    crossOrigin="anonymous"
+                />
+            </div>
+            <div className="content-container">
+            <div className="image-container">
+                <h2>{course.title}</h2>
+                <img src={course.imageURL} alt={course.title} />
+            </div>
+            <div className="playlist-container">
+                <h3>Playlist:</h3>
+                <ul className="playlist">
+                    {course.videos.map((video, index) => (
+                        <li key={index}>
+                            Title: {video.Title}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            </div>
         </div>
     );
 };
