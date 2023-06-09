@@ -7,7 +7,6 @@ const SingleCourse = ({ match }) => {
     const courseId = match.params.id;
     const [course, setCourse] = useState(null);
     const videoRef = useRef(null);
-    const [currentVideo, setCurrentVideo] = useState(null);
     let hls = null;
 
     useEffect(() => {
@@ -29,18 +28,19 @@ const SingleCourse = ({ match }) => {
         }
     };
 
-    const handleVideoClick = (videoUrl, index) => {
+    const handleVideoClick = (videoUrl) => {
         document.getElementById("url").value = videoUrl;
-        playVideo(index);
+        playVideo();
     };
 
-    const playVideo = (index) => {
+
+    const playVideo = () => {
         const streamBtn = document.getElementById("streamBtn");
         if (streamBtn) {
-            setCurrentVideo(index);
             streamBtn.click();
         }
     };
+
 
 
     useEffect(() => {
@@ -141,7 +141,6 @@ const SingleCourse = ({ match }) => {
             hls.attachMedia(videoRef.current);
         };
 
-
         const streamBtn = document.getElementById("streamBtn");
         if (streamBtn) {
             streamBtn.addEventListener("click", stream);
@@ -155,11 +154,7 @@ const SingleCourse = ({ match }) => {
                 streamBtn.removeEventListener("click", stream);
             }
         };
-    }, [currentVideo]);
-    const markAsWatched = (index) => {
-        // Set the current video as watched
-        setCurrentVideo(index);
-    };
+    }, []);
 
     if (!course) {
         return <div>Loading...</div>;
@@ -194,9 +189,7 @@ const SingleCourse = ({ match }) => {
                     <ul className="playlist">
                         {course.videos.map((video, index) => (
                             <li key={index}>
-                                <button onClick={() => handleVideoClick(video.URL, index)}>
-                                    {/* Display check mark if the video has been watched */}
-                                    {index <= currentVideo && <span className="check-mark">&#10003;</span>}
+                                <button onClick={() => handleVideoClick(video.URL)}>
                                     Title: {video.Title}
                                 </button>
                             </li>
