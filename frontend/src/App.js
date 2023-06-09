@@ -1,7 +1,8 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Courses from './components/Courses';
+import SingleCourse from './components/SingleCourse';
 import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
             <div>
                 <Switch>
                     <Route exact path="/" component={Login} />
-                    <PrivateRoute path="/courses" component={Courses} />
+                    <PrivateRoute exact path="/courses" component={Courses} />
+                    <PrivateRoute path="/courses/:id" component={SingleCourse} />
                 </Switch>
             </div>
         </Router>
